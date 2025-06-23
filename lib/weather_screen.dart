@@ -17,7 +17,7 @@ class WeatherScreen extends StatelessWidget {
             onPressed: () {},
             splashColor: Color.fromRGBO(71, 137, 224, 1),
             focusColor: Color.fromRGBO(71, 137, 224, 1),
-            icon: Icon(Icons.refresh),
+            icon: Icon(Icons.refresh_outlined),
           ),
         ],
       ),
