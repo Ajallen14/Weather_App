@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class WeatherScreen extends StatelessWidget {
@@ -18,6 +20,24 @@ class WeatherScreen extends StatelessWidget {
             splashColor: Color.fromRGBO(71, 137, 224, 1),
             focusColor: Color.fromRGBO(71, 137, 224, 1),
             icon: Icon(Icons.refresh),
+          ),
+        ],
+      ),
+      body: Column(
+        children: [
+          const Placeholder(
+            //MAIN CARD
+            fallbackHeight: 250,
+          ),
+          const SizedBox(height: 20),
+          const Placeholder(
+            // weatherforecast cards
+            fallbackHeight: 160,
+          ),
+          const SizedBox(height: 20),
+          const Placeholder(
+            // weatherforecast cards
+            fallbackHeight: 150,
           ),
         ],
       ),
