@@ -23,23 +23,55 @@ class WeatherScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          const Placeholder(
-            //MAIN CARD
-            fallbackHeight: 250,
-          ),
-          const SizedBox(height: 20),
-          const Placeholder(
-            // weatherforecast cards
-            fallbackHeight: 160,
-          ),
-          const SizedBox(height: 20),
-          const Placeholder(
-            // weatherforecast cards
-            fallbackHeight: 150,
-          ),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(17),
+        child: Column(
+          children: [
+            SizedBox(
+              width: double.infinity,
+              child: Card(
+                elevation: 20,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(23),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(23),
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Column(
+                        children: [
+                          Text(
+                            "30°K",
+                            style: TextStyle(
+                              fontSize: 40,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Icon(Icons.cloud, size: 65),
+                          SizedBox(height: 7),
+                          Text("Rain", style: TextStyle(fontSize: 30)),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            const Placeholder(
+              // weatherforecast cards
+              fallbackHeight: 160,
+            ),
+            const SizedBox(height: 20),
+            const Placeholder(
+              // weatherforecast cards
+              fallbackHeight: 150,
+            ),
+          ],
+        ),
       ),
     );
   }
