@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:weather_app/additional_Info.dart';
 import 'package:weather_app/hourly_forecast_cards.dart';
@@ -47,7 +48,7 @@ class WeatherScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           Text(
-                            "30°K",
+                            "30°C",
                             style: TextStyle(
                               fontSize: 40,
                               fontWeight: FontWeight.w500,
@@ -73,12 +74,13 @@ class WeatherScreen extends StatelessWidget {
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  SizedBox(width: 100, child: HourlyForecastCards()),
-                  SizedBox(width: 100, child: HourlyForecastCards()),
-                  SizedBox(width: 100, child: HourlyForecastCards()),
-                  SizedBox(width: 100, child: HourlyForecastCards()),
-                  SizedBox(width: 100, child: HourlyForecastCards()),
+                  HourlyForecastCards(),
+                  HourlyForecastCards(),
+                  HourlyForecastCards(),
+                  HourlyForecastCards(),
+                  HourlyForecastCards(),
                 ],
               ),
             ),
@@ -88,7 +90,26 @@ class WeatherScreen extends StatelessWidget {
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
             ),
             SizedBox(height: 15),
-            AdditionalInfo(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                AdditionalInfo(
+                  icon: Icons.water_drop,
+                  label: "Humidity",
+                  value: "91",
+                ),
+                AdditionalInfo(
+                  icon: CupertinoIcons.wind,
+                  label: "Wind",
+                  value: "7.5",
+                ),
+                AdditionalInfo(
+                  icon: CupertinoIcons.umbrella,
+                  label: "Pressure",
+                  value: "1000",
+                ),
+              ],
+            ),
           ],
         ),
       ),

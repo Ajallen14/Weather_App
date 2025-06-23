@@ -22,7 +22,7 @@ class HourlyForecastCards extends StatelessWidget {
                 const SizedBox(width: 17),
                 Icon(Icons.cloud, size: 30),
                 SizedBox(width: 17),
-                Text("30°K", style: TextStyle(fontSize: 17)),
+                Text("30°C", style: TextStyle(fontSize: 17)),
               ],
             ),
           ),
