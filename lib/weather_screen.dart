@@ -74,6 +74,9 @@ class _WeatherScreenState extends State<WeatherScreen> {
           final currentWeatherData = data?['list'][0];
           final currentTemperature = currentWeatherData['main']['temp'];
           final currentWeather = currentWeatherData['weather'][0]['main'];
+          final currentPressure = currentWeatherData['main']['pressure'];
+          final currentWind = currentWeatherData['wind']['speed'];
+          final currenthumidity = currentWeatherData['main']['humidity'];
 
           return Padding(
             padding: const EdgeInsets.all(17),
@@ -175,17 +178,17 @@ class _WeatherScreenState extends State<WeatherScreen> {
                     AdditionalInfo(
                       icon: Icons.water_drop,
                       label: "Humidity",
-                      value: "91",
+                      value: currenthumidity.toString(),
                     ),
                     AdditionalInfo(
                       icon: CupertinoIcons.wind,
                       label: "Wind",
-                      value: "7.5",
+                      value: currentWind.toString(),
                     ),
                     AdditionalInfo(
                       icon: CupertinoIcons.umbrella,
                       label: "Pressure",
-                      value: "1000",
+                      value: currentPressure.toString(),
                     ),
                   ],
                 ),
