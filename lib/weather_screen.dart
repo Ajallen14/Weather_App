@@ -61,7 +61,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                 weather = getCurentWeather();
               });
             },
-            focusColor: Color.fromRGBO(71, 137, 224, 1),
+            focusColor: Color.fromRGBO(63, 60, 60, 1),
             icon: Icon(Icons.refresh),
           ),
         ],
