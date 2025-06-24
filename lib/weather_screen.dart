@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
@@ -5,8 +6,44 @@ import 'package:flutter/material.dart';
 import 'package:weather_app/additional_Info.dart';
 import 'package:weather_app/hourly_forecast_cards.dart';
 
-class WeatherScreen extends StatelessWidget {
+import 'package:http/http.dart' as http;
+
+class WeatherScreen extends StatefulWidget {
   const WeatherScreen({super.key});
+
+  @override
+  State<WeatherScreen> createState() => _WeatherScreenState();
+}
+
+class _WeatherScreenState extends State<WeatherScreen> {
+  double temp = 
+
+  @override
+  void initState() {
+    super.initState();
+    getCurentWeather();
+  }
+
+  Future getCurentWeather() async {
+    try {
+      String cityName = "Aluva";
+      const openWeatherKey = "c49fb2da12b45b5be738a2b87fbdcc19";
+      final res = await http.get(
+        Uri.parse(
+          "https://api.openweathermap.org/data/2.5/forecast?q=$cityName&APPID=$openWeatherKey",
+        ),
+      );
+
+      final data = jsonDecode(res.body);
+      if (int.parse(data['cod']) != 200) {
+        throw "An unexpected error occured";
+      }
+
+      temp = data['list'][0]['main']['temp'];
+    } catch (e) {
+      throw e.toString();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +85,7 @@ class WeatherScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           Text(
-                            "30°C",
+                            "$temp K",
                             style: TextStyle(
                               fontSize: 40,
                               fontWeight: FontWeight.w500,
@@ -76,11 +113,31 @@ class WeatherScreen extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  HourlyForecastCards(),
-                  HourlyForecastCards(),
-                  HourlyForecastCards(),
-                  HourlyForecastCards(),
-                  HourlyForecastCards(),
+                  HourlyForecastCards(
+                    time: "00:00",
+                    icon: Icons.cloud,
+                    temperature: "30°C",
+                  ),
+                  HourlyForecastCards(
+                    time: "00:00",
+                    icon: Icons.sunny,
+                    temperature: "30°C",
+                  ),
+                  HourlyForecastCards(
+                    time: "00:00",
+                    icon: Icons.cloud,
+                    temperature: "30°C",
+                  ),
+                  HourlyForecastCards(
+                    time: "00:00",
+                    icon: Icons.cloud,
+                    temperature: "30°C",
+                  ),
+                  HourlyForecastCards(
+                    time: "00:00",
+                    icon: Icons.cloud,
+                    temperature: "30°C",
+                  ),
                 ],
               ),
             ),
