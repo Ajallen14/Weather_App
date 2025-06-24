@@ -127,43 +127,30 @@ class _WeatherScreenState extends State<WeatherScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 38),
                 Text(
-                  "Weather Forecast",
+                  "Hourly Forecast",
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
                 ),
-                SizedBox(height: 10),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      HourlyForecastCards(
-                        time: "00:00",
-                        icon: Icons.cloud,
-                        temperature: "30°C",
-                      ),
-                      HourlyForecastCards(
-                        time: "00:00",
-                        icon: Icons.sunny,
-                        temperature: "30°C",
-                      ),
-                      HourlyForecastCards(
-                        time: "00:00",
-                        icon: Icons.cloud,
-                        temperature: "30°C",
-                      ),
-                      HourlyForecastCards(
-                        time: "00:00",
-                        icon: Icons.cloud,
-                        temperature: "30°C",
-                      ),
-                      HourlyForecastCards(
-                        time: "00:00",
-                        icon: Icons.cloud,
-                        temperature: "30°C",
-                      ),
-                    ],
+                SizedBox(height: 8),
+                SizedBox(
+                  height: 120,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 4,
+                    itemBuilder: (context, index) {
+                      final hourlyForecast = data!['list'][index + 1];
+
+                      return HourlyForecastCards(
+                        icon: hourlyForecast['weather'][0]['main'] == 'Rain'
+                            ? CupertinoIcons.cloud_rain
+                            : hourlyForecast['weather'][0]['main'] == 'Clouds'
+                            ? Icons.cloud
+                            : Icons.sunny,
+                        temperature: hourlyForecast['main']['temp'].toString(),
+                        time: hourlyForecast['dt'].toString(),
+                      );
+                    },
                   ),
                 ),
                 const SizedBox(height: 20),
