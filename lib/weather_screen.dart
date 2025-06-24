@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:weather_app/additional_Info.dart';
 import 'package:weather_app/hourly_forecast_cards.dart';
 
@@ -16,10 +17,12 @@ class WeatherScreen extends StatefulWidget {
 }
 
 class _WeatherScreenState extends State<WeatherScreen> {
+  late Future<Map<String, dynamic>> weather;
+
   @override
   void initState() {
     super.initState();
-    getCurentWeather();
+    weather = getCurentWeather();
   }
 
   Future<Map<String, dynamic>> getCurentWeather() async {
@@ -53,7 +56,11 @@ class _WeatherScreenState extends State<WeatherScreen> {
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              setState(() {
+                weather = getCurentWeather();
+              });
+            },
             focusColor: Color.fromRGBO(71, 137, 224, 1),
             icon: Icon(Icons.refresh),
           ),
@@ -61,7 +68,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
       ),
 
       body: FutureBuilder(
-        future: getCurentWeather(),
+        future: weather,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator.adaptive());
@@ -70,7 +77,8 @@ class _WeatherScreenState extends State<WeatherScreen> {
             return Text(snapshot.error.toString());
           }
 
-          final data = snapshot.data;
+          final data = snapshot.data ?? {};
+
           final currentWeatherData = data?['list'][0];
           final currentTemperature = currentWeatherData['main']['temp'];
           final currentWeather = currentWeatherData['weather'][0]['main'];
@@ -100,7 +108,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                           child: Column(
                             children: [
                               Text(
-                                "$currentTemperature K",
+                                "${(currentTemperature - 273.15).toStringAsFixed(1)} °C",
                                 style: TextStyle(
                                   fontSize: 40,
                                   fontWeight: FontWeight.w500,
@@ -137,9 +145,10 @@ class _WeatherScreenState extends State<WeatherScreen> {
                   height: 120,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: 4,
+                    itemCount: 6,
                     itemBuilder: (context, index) {
                       final hourlyForecast = data!['list'][index + 1];
+                      final time = DateTime.parse(hourlyForecast['dt_txt']);
 
                       return HourlyForecastCards(
                         icon: hourlyForecast['weather'][0]['main'] == 'Rain'
@@ -147,8 +156,9 @@ class _WeatherScreenState extends State<WeatherScreen> {
                             : hourlyForecast['weather'][0]['main'] == 'Clouds'
                             ? Icons.cloud
                             : Icons.sunny,
-                        temperature: hourlyForecast['main']['temp'].toString(),
-                        time: hourlyForecast['dt'].toString(),
+                        temperature:
+                            "${(hourlyForecast['main']['temp'] - 273.15).toStringAsFixed(1)} °C",
+                        time: DateFormat.jm().format(time),
                       );
                     },
                   ),
