@@ -109,7 +109,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                     ? CupertinoIcons.cloud_rain
                                     : currentWeather == 'Clouds'
                                     ? Icons.cloud
-                                    : Icons.wb_sunny,
+                                    : Icons.sunny,
                                 size: 65,
                               ),
                               SizedBox(height: 7),
