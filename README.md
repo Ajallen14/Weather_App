@@ -23,12 +23,10 @@ cd weather_app
 2. **Install dependencies**
 ```
 flutter pub get
-
 ```
 3. **Run the app**
 ```
 flutter run
-
 ```
 Make sure you have an emulator running or a physical device connected.
 
