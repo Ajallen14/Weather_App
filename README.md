@@ -56,4 +56,7 @@ The app fetches weather data from an online weather API (e.g., [OpenWeatherMap](
 
 # Video
 
+https://github.com/user-attachments/assets/43ace884-53b4-41e9-8004-3fe741d65aa7
+
+![Screenshot_1750853295](https://github.com/user-attachments/assets/668975f9-817d-4ad6-a3cf-9a50153d161b)
 
